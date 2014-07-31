@@ -1,11 +1,11 @@
 function ResultObject() {
 }
 ResultObject.prototype = {
-	getValue: function() {
-		return this.value;
+	get: function() {
+		return this.result;
 	},
-	setValue: function(value) {
-		this.value = value;
+	set: function(result) {
+		this.result = result;
 	}
 };
 function Syncton(){
@@ -15,7 +15,7 @@ function Syncton(){
 }
 Syncton.prototype.setInterval = function(interval) {
 	this.interval = interval;
-}
+};
 Syncton.prototype.todo = function() {
 	var argArray = Array.prototype.slice.call(arguments); 
 	var resultObject = new ResultObject();
@@ -29,24 +29,24 @@ Syncton.prototype.todo = function() {
 		this.queue.push([waiter,this.interval]);
 	}
 	return resultObject;
-}
+};
 Syncton.prototype.finish = function() {
 	this.count--;
 	if (this.queue.length > 0) {
 		var a = this.queue.shift();
 		this.start(a);
 	}
-}
+};
 Syncton.prototype.start = function(a) {
 	this.count++;
 	var fun = a.shift();
 	fun.apply(this,a);
-}
+};
 finisher=function(syncton) {
 	syncton.finish();
-}
+};
 waiter=function(interval) {
 	setTimeout(finisher,interval,this);
-}
+};
 module.exports = new Syncton();
  
