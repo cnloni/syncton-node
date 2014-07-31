@@ -9,7 +9,7 @@ ResultObject.prototype = {
 	}
 };
 function Syncton(){
-	this.queue = new Array();
+	this.queue = [];
 	this.count = 0;
 	this.interval = null;
 }
@@ -30,17 +30,17 @@ Syncton.prototype.todo = function() {
 	}
 	return resultObject;
 };
+Syncton.prototype.start = function(a) {
+	this.count++;
+	var fun = a.shift();
+	fun.apply(this,a);
+};
 Syncton.prototype.finish = function() {
 	this.count--;
 	if (this.queue.length > 0) {
 		var a = this.queue.shift();
 		this.start(a);
 	}
-};
-Syncton.prototype.start = function(a) {
-	this.count++;
-	var fun = a.shift();
-	fun.apply(this,a);
 };
 finisher=function(syncton) {
 	syncton.finish();
