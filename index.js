@@ -1,13 +1,3 @@
-function ResultObject() {
-}
-ResultObject.prototype = {
-	get: function() {
-		return this.result;
-	},
-	set: function(result) {
-		this.result = result;
-	}
-};
 function Syncton(){
 	this.queue = [];
 	this.count = 0;
@@ -18,7 +8,7 @@ Syncton.prototype.setInterval = function(interval) {
 };
 Syncton.prototype.todo = function() {
 	var argArray = Array.prototype.slice.call(arguments); 
-	var resultObject = new ResultObject();
+	var resultObject = {};
 	argArray.push(resultObject);
 	if (this.count == 0) {
 		this.start(argArray);
