@@ -67,5 +67,7 @@ finisher=function(syncton) {
 waiter=function(interval) {
 	setTimeout(finisher,interval,this);
 };
-module.exports = new Syncton();
- 
+module.exports.getInstance = function() {
+	return new Syncton();
+};
+
