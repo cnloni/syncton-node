@@ -1,9 +1,9 @@
-var syncton = require('../index');
+var sync = require('syncton-node').create();
 var resultStore = [];
 for(var i=0;i<9;i++) {
-	resultStore[i] = syncton.todo((i%2?executer:waiter),i+1);
+	resultStore[i] = sync.todo((i%2?executer:waiter),i+1);
 }
-syncton.todo(function(){
+sync.todo(function(){
 	console.log('All Results:');
 	for(var i=0;i<resultStore.length;i++) {
 		console.log(resultStore[i].get());
